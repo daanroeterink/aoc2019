@@ -65,6 +65,52 @@ namespace Day5
                     Console.WriteLine($"Value at: {Array[i + 1]} with mode {firstParam} is: {GetValue(firstParam, Array[i + 1])}");
                     i += 2;
                 }
+                else if (opcode == 5)
+                {
+                    if (GetValue(firstParam, Array[i + 1]) != 0)
+                    {
+                        i = GetValue(secondParam, Array[i + 2]);
+                    }
+                    else
+                    {
+                        i += 3;
+                    }
+                }
+                else if (opcode == 6)
+                {
+                    if (GetValue(firstParam, Array[i + 1]) == 0)
+                    {
+                        i = GetValue(secondParam, Array[i + 2]);
+                    }
+                    else
+                    {
+                        i += 3;
+                    }
+                }
+                else if (opcode == 7)
+                {
+                    if (GetValue(firstParam, Array[i + 1]) < GetValue(secondParam, Array[i + 2]))
+                    {
+                        Array[Array[i + 3]] = 1;
+                    }
+                    else
+                    {
+                        Array[Array[i + 3]] = 0;
+                    }
+                    i += 4;
+                }
+                else if (opcode == 8)
+                {
+                    if (GetValue(firstParam, Array[i + 1]) == GetValue(secondParam, Array[i + 2]))
+                    {
+                        Array[Array[i + 3]] = 1;
+                    }
+                    else
+                    {
+                        Array[Array[i + 3]] = 0;
+                    }
+                    i += 4;
+                }
                 else if (opcode == 99)
                 {
                     Console.WriteLine("HALT");
