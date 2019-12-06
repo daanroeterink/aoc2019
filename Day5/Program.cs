@@ -43,78 +43,70 @@ namespace Day5
                     : Mode.Position;
                 
 
-                if (opcode == 1)
+                switch (opcode)
                 {
-                    Array[Array[i + 3]] = GetValue(firstParam, Array[i + 1]) + GetValue(secondParam, Array[i + 2]);
-                    i += 4;
-                }
-                else if (opcode == 2)
-                {
-                    Array[Array[i + 3]] = GetValue(firstParam, Array[i + 1]) * GetValue(secondParam, Array[i + 2]);
-                    i += 4;
-                }
-                else if (opcode == 3)
-                {
-                    Console.WriteLine("Give input please");
-                    var inputVariable = int.Parse(Console.ReadLine());
-                    Array[Array[i + 1]] = inputVariable;
-                    i += 2;
-                }
-                else if (opcode == 4)
-                {
-                    Console.WriteLine($"Value at: {Array[i + 1]} with mode {firstParam} is: {GetValue(firstParam, Array[i + 1])}");
-                    i += 2;
-                }
-                else if (opcode == 5)
-                {
-                    if (GetValue(firstParam, Array[i + 1]) != 0)
+                    case 1:
+                        Array[Array[i + 3]] = GetValue(firstParam, Array[i + 1]) + GetValue(secondParam, Array[i + 2]);
+                        i += 4;
+                        break;
+                    case 2:
+                        Array[Array[i + 3]] = GetValue(firstParam, Array[i + 1]) * GetValue(secondParam, Array[i + 2]);
+                        i += 4;
+                        break;
+                    case 3:
                     {
+                        Console.WriteLine("Give input please");
+                        var inputVariable = int.Parse(Console.ReadLine());
+                        Array[Array[i + 1]] = inputVariable;
+                        i += 2;
+                        break;
+                    }
+                    case 4:
+                        Console.WriteLine($"Value at: {Array[i + 1]} with mode {firstParam} is: {GetValue(firstParam, Array[i + 1])}");
+                        i += 2;
+                        break;
+                    case 5 when GetValue(firstParam, Array[i + 1]) != 0:
                         i = GetValue(secondParam, Array[i + 2]);
-                    }
-                    else
-                    {
+                        break;
+                    case 5:
                         i += 3;
-                    }
-                }
-                else if (opcode == 6)
-                {
-                    if (GetValue(firstParam, Array[i + 1]) == 0)
-                    {
+                        break;
+                    case 6 when GetValue(firstParam, Array[i + 1]) == 0:
                         i = GetValue(secondParam, Array[i + 2]);
-                    }
-                    else
-                    {
+                        break;
+                    case 6:
                         i += 3;
-                    }
-                }
-                else if (opcode == 7)
-                {
-                    if (GetValue(firstParam, Array[i + 1]) < GetValue(secondParam, Array[i + 2]))
+                        break;
+                    case 7:
                     {
-                        Array[Array[i + 3]] = 1;
+                        if (GetValue(firstParam, Array[i + 1]) < GetValue(secondParam, Array[i + 2]))
+                        {
+                            Array[Array[i + 3]] = 1;
+                        }
+                        else
+                        {
+                            Array[Array[i + 3]] = 0;
+                        }
+                        i += 4;
+                        break;
                     }
-                    else
+                    case 8:
                     {
-                        Array[Array[i + 3]] = 0;
+                        if (GetValue(firstParam, Array[i + 1]) == GetValue(secondParam, Array[i + 2]))
+                        {
+                            Array[Array[i + 3]] = 1;
+                        }
+                        else
+                        {
+                            Array[Array[i + 3]] = 0;
+                        }
+                        i += 4;
+                        break;
                     }
-                    i += 4;
-                }
-                else if (opcode == 8)
-                {
-                    if (GetValue(firstParam, Array[i + 1]) == GetValue(secondParam, Array[i + 2]))
-                    {
-                        Array[Array[i + 3]] = 1;
-                    }
-                    else
-                    {
-                        Array[Array[i + 3]] = 0;
-                    }
-                    i += 4;
-                }
-                else if (opcode == 99)
-                {
-                    Console.WriteLine("HALT");
-                    halt = true;
+                    case 99:
+                        Console.WriteLine("HALT");
+                        halt = true;
+                        break;
                 }
             } 
             Console.ReadLine();
